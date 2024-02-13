@@ -3,10 +3,7 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
-import org.hibernate.HibernateError;
-import org.hibernate.HibernateException;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class Main {

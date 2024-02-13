@@ -12,26 +12,38 @@ public class UserServiceImpl implements UserService {
     private UserDaoHibernateImpl DAOHiber = new UserDaoHibernateImpl();
 
     public void createUsersTable() {
+        // DAO.createUsersTable();
+
         DAOHiber.createUsersTable();
     }
 
     public void dropUsersTable() {
+        // DAO.dropUsersTable();
+
         DAOHiber.dropUsersTable();
     }
 
     public void saveUser(String name, String lastName, byte age) {
+        // DAO.saveUser(name, lastName, age);
+
         DAOHiber.saveUser(name, lastName, age);
     }
 
     public void removeUserById(long id) {
+        // DAO.removeUserById(id);
+
         DAOHiber.removeUserById(id);
     }
 
     public List<User> getAllUsers() {
+        // return DAO.getAllUsers();
+
         return DAOHiber.getAllUsers();
     }
 
     public void cleanUsersTable() {
+        // DAO.cleanUsersTable();
+
         DAOHiber.cleanUsersTable();
     }
 }
