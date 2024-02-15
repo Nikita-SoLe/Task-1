@@ -8,42 +8,42 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDaoJDBCImpl DAO = new UserDaoJDBCImpl();
-    private UserDaoHibernateImpl DAOHiber = new UserDaoHibernateImpl();
+    private final UserDaoJDBCImpl daoJDBC = new UserDaoJDBCImpl();
+    private final UserDaoHibernateImpl daoHibernate = new UserDaoHibernateImpl();
 
     public void createUsersTable() {
-        // DAO.createUsersTable();
+        // daoJDBC.createUsersTable();
 
-        DAOHiber.createUsersTable();
+        daoHibernate.createUsersTable();
     }
 
     public void dropUsersTable() {
-        // DAO.dropUsersTable();
+        // daoJDBC.dropUsersTable();
 
-        DAOHiber.dropUsersTable();
+        daoHibernate.dropUsersTable();
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        // DAO.saveUser(name, lastName, age);
+        // daoJDBC.saveUser(name, lastName, age);
 
-        DAOHiber.saveUser(name, lastName, age);
+        daoHibernate.saveUser(name, lastName, age);
     }
 
     public void removeUserById(long id) {
-        // DAO.removeUserById(id);
+        // daoJDBC.removeUserById(id);
 
-        DAOHiber.removeUserById(id);
+        daoHibernate.removeUserById(id);
     }
 
     public List<User> getAllUsers() {
-        // return DAO.getAllUsers();
+        // return daoJDBC.getAllUsers();
 
-        return DAOHiber.getAllUsers();
+        return daoHibernate.getAllUsers();
     }
 
     public void cleanUsersTable() {
-        // DAO.cleanUsersTable();
+        // daoJDBC.cleanUsersTable();
 
-        DAOHiber.cleanUsersTable();
+        daoHibernate.cleanUsersTable();
     }
 }
