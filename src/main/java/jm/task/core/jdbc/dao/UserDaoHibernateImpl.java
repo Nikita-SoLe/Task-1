@@ -23,7 +23,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (
                 Session session = Util.getFactory().openSession();
-                ) {
+        ) {
             transaction = session.beginTransaction();
             session.createSQLQuery(GetSQLQueryUsersTemplate.CREATE_TABLE).executeUpdate();
             transaction.commit();
@@ -50,7 +50,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
             System.out.println("Таблица 'users' успешно была удалена.");
         } catch (Exception e) {
-            if  (transaction != null)
+            if (transaction != null)
                 transaction.rollback();
 
             System.out.println("Проблема с удаление таблицы в Базе Данных.");
@@ -66,15 +66,14 @@ public class UserDaoHibernateImpl implements UserDao {
         ) {
             transaction = session.beginTransaction();
             session.createSQLQuery(GetSQLQueryUsersTemplate.INSERT_ONE_USER)
-                            .setParameter(1, name)
-                            .setParameter(2, lastName)
-                            .setParameter(3, age)
-                                    .executeUpdate();
+                    .setParameter(1, name)
+                    .setParameter(2, lastName)
+                    .setParameter(3, age)
+                    .executeUpdate();
             transaction.commit();
 
-            System.out.println("User с именем "+name+" успешно добавлен.");
-        }
-        catch (Exception e) {
+            System.out.println("User с именем " + name + " успешно добавлен.");
+        } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
 
@@ -89,18 +88,17 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (
                 Session session = Util.getFactory().openSession();
-                ) {
+        ) {
 
             transaction = session.beginTransaction();
             session.createSQLQuery(GetSQLQueryUsersTemplate.DELETE_USER_BY_ID)
                     .setParameter(1, id)
-                            .executeUpdate();
+                    .executeUpdate();
             transaction.commit();
 
             System.out.println("Пользователь удален.");
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
 
@@ -116,14 +114,13 @@ public class UserDaoHibernateImpl implements UserDao {
         try (
                 Session session = Util.getFactory().openSession();
                 ScrollableResults result = session
-                                           .createSQLQuery(GetSQLQueryUsersTemplate.SELECT_ALL_USERS)
-                                           .scroll();
-                ) {
+                        .createSQLQuery(GetSQLQueryUsersTemplate.SELECT_ALL_USERS)
+                        .scroll();
+        ) {
             transaction = session.beginTransaction();
             fillListUsers(result, list);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
 
@@ -134,7 +131,7 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     private void fillListUsers(ScrollableResults result, List<User> list) {
-        for ( ; result.next() ; ) {
+        for (; result.next(); ) {
             Object[] resultLine = result.get();
 
             Long id = ((BigInteger) resultLine[0]).longValue();
@@ -160,8 +157,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
 
             System.out.println("Таблица User успешно очищена.");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
 

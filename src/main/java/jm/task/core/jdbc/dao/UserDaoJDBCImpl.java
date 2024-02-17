@@ -23,7 +23,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         catch (SQLException e) {
             System.out.println("Таблица уже существует или у вас ошибка.");
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -36,7 +36,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         catch (SQLException e) {
             System.out.println("Таблица уже не существует или у вас ошибка");
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -53,7 +53,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         catch (SQLException e) {
             System.out.println("Произошли проблемы с добавлением User.");
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -68,7 +68,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         catch (SQLException e) {
             System.out.println("Произошла ошибка удаления пользователя.");
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -93,7 +93,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         catch (SQLException e) {
             System.out.println("Произошла ошибка получения пользователей.");
-            System.out.println(e);
+            e.printStackTrace();
         }
         return list;
     }
@@ -107,7 +107,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         catch (SQLException e) {
             System.out.println("Произошла ошибка очищения таблицы");
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }
