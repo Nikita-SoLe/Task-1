@@ -1,7 +1,7 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.GetSQLQueryTemplate;
+import jm.task.core.jdbc.util.GetSQLQueryUsersTemplate;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
@@ -23,7 +23,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 Session session = Util.getFactory().openSession();
                 ) {
             Transaction transaction = session.beginTransaction();
-            session.createSQLQuery(GetSQLQueryTemplate.CREATE_TABLE).executeUpdate();
+            session.createSQLQuery(GetSQLQueryUsersTemplate.CREATE_TABLE).executeUpdate();
             transaction.commit();
 
             System.out.println("Таблица 'users' успешно создана.");
@@ -39,7 +39,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 Session session = Util.getFactory().openSession();
         ) {
             Transaction transaction = session.beginTransaction();
-            session.createSQLQuery(GetSQLQueryTemplate.DROP_TABLE).executeUpdate();
+            session.createSQLQuery(GetSQLQueryUsersTemplate.DROP_TABLE).executeUpdate();
             transaction.commit();
 
             System.out.println("Таблица 'users' успешно была удалена.");
@@ -55,7 +55,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 Session session = Util.getFactory().openSession();
         ) {
             Transaction transaction = session.beginTransaction();
-            session.createSQLQuery(GetSQLQueryTemplate.INSERT_ONE_USER)
+            session.createSQLQuery(GetSQLQueryUsersTemplate.INSERT_ONE_USER)
                             .setParameter(1, name)
                             .setParameter(2, lastName)
                             .setParameter(3, age)
@@ -76,7 +76,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 Session session = Util.getFactory().openSession();
                 ) {
             Transaction transaction = session.beginTransaction();
-            session.createSQLQuery(GetSQLQueryTemplate.DELETE_USER_BY_ID)
+            session.createSQLQuery(GetSQLQueryUsersTemplate.DELETE_USER_BY_ID)
                     .setParameter(1, id)
                             .executeUpdate();
             transaction.commit();
@@ -96,7 +96,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (
                 Session session = Util.getFactory().openSession();
                 ScrollableResults result = session
-                                           .createSQLQuery(GetSQLQueryTemplate.SELECT_ALL_USERS)
+                                           .createSQLQuery(GetSQLQueryUsersTemplate.SELECT_ALL_USERS)
                                            .scroll();
                 ) {
             Transaction transaction = session.beginTransaction();
@@ -132,7 +132,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 Session session = Util.getFactory().openSession();
         ) {
             Transaction transaction = session.beginTransaction();
-            session.createSQLQuery(GetSQLQueryTemplate.DELETE_ALL_USERS).executeUpdate();
+            session.createSQLQuery(GetSQLQueryUsersTemplate.DELETE_ALL_USERS).executeUpdate();
             transaction.commit();
 
             System.out.println("Таблица User успешно очищена.");

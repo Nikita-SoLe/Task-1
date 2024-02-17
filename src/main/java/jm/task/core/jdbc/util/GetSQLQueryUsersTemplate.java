@@ -1,6 +1,6 @@
 package jm.task.core.jdbc.util;
 
-public class GetSQLQueryTemplate {
+public class GetSQLQueryUsersTemplate {
     public static final String CREATE_TABLE = """
                 CREATE TABLE IF NOT EXISTS users (
                     id BIGSERIAL PRIMARY KEY,

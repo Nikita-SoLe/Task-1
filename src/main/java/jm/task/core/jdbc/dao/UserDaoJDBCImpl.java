@@ -1,7 +1,7 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.GetSQLQueryTemplate;
+import jm.task.core.jdbc.util.GetSQLQueryUsersTemplate;
 import jm.task.core.jdbc.util.Util;
 
 import java.sql.*;
@@ -9,18 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
+    private static final Connection connection = Util.getConnection();
 
     public UserDaoJDBCImpl() {
     }
 
     public void createUsersTable() {
-
-        Connection connection = Util.getConnection();
-
         try (
                 Statement statement = connection.createStatement();
         ) {
-            statement.execute(GetSQLQueryTemplate.CREATE_TABLE);
+            statement.execute(GetSQLQueryUsersTemplate.CREATE_TABLE);
             System.out.println("Таблица успешно создана");
         }
         catch (SQLException e) {
@@ -30,13 +28,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-
-        Connection connection = Util.getConnection();
-
         try (
                 Statement statement = connection.createStatement();
         ) {
-            statement.execute(GetSQLQueryTemplate.DROP_TABLE);
+            statement.execute(GetSQLQueryUsersTemplate.DROP_TABLE);
             System.out.println("Таблица успешно удалена");
         }
         catch (SQLException e) {
@@ -46,11 +41,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-
-        Connection connection = Util.getConnection();
-
         try (
-                PreparedStatement statement = connection.prepareStatement(GetSQLQueryTemplate.INSERT_ONE_USER)
+                PreparedStatement statement = connection.prepareStatement(GetSQLQueryUsersTemplate.INSERT_ONE_USER)
         ) {
             statement.setString(1, name);
             statement.setString(2, lastName);
@@ -66,11 +58,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-
-        Connection connection = Util.getConnection();
-
         try (
-                PreparedStatement statement = connection.prepareStatement(GetSQLQueryTemplate.DELETE_USER_BY_ID);
+                PreparedStatement statement = connection.prepareStatement(GetSQLQueryUsersTemplate.DELETE_USER_BY_ID);
         ) {
             statement.setLong(1, id);
 
@@ -86,11 +75,9 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
 
-        Connection connection = Util.getConnection();
-
         try (
                 Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(GetSQLQueryTemplate.SELECT_ALL_USERS);
+                ResultSet result = statement.executeQuery(GetSQLQueryUsersTemplate.SELECT_ALL_USERS);
         ) {
             while (result.next()) {
                 Long id = result.getLong("id");
@@ -112,13 +99,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-
-        Connection connection = Util.getConnection();
-
         try (
                 Statement statement = connection.createStatement();
         ) {
-            statement.execute(GetSQLQueryTemplate.DELETE_ALL_USERS);
+            statement.execute(GetSQLQueryUsersTemplate.DELETE_ALL_USERS);
             System.out.println("Таблица User успешно очищена.");
         }
         catch (SQLException e) {
