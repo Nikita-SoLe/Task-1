@@ -96,26 +96,11 @@ public class UserDaoHibernateImpl implements UserDao {
         try (
                 Session session = Util.getFactory().openSession();
                 ScrollableResults result = session
-                        .createSQLQuery(GetSQLQueryTemplate.SELECT_ALL_USERS)
-                        .scroll();
+                                           .createSQLQuery(GetSQLQueryTemplate.SELECT_ALL_USERS)
+                                           .scroll();
                 ) {
-
             Transaction transaction = session.beginTransaction();
-
-            while (result.next()) {
-                Object[] res = result.get();
-
-                BigInteger id = (BigInteger) res[0];
-                String name = (String) res[1];
-                String lastName = (String) res[2];
-                Short age = (Short) res[3];
-
-                User user = new User(name, lastName, age.byteValue());
-                user.setId(id.longValue());
-
-                list.add(user);
-            }
-
+            fillListUsers(result, list);
             transaction.commit();
         }
         catch (Exception e) {
@@ -123,6 +108,22 @@ public class UserDaoHibernateImpl implements UserDao {
             System.out.println(e);
         }
         return list;
+    }
+
+    private void fillListUsers(ScrollableResults result, List<User> list) {
+        for ( ; result.next() ; ) {
+            Object[] resultLine = result.get();
+
+            Long id = ((BigInteger) resultLine[0]).longValue();
+            String name = (String) resultLine[1];
+            String lastName = (String) resultLine[2];
+            Byte age = ((Short) resultLine[3]).byteValue();
+
+            User user = new User(name, lastName, age);
+            user.setId(id);
+
+            list.add(user);
+        }
     }
 
     @Override
