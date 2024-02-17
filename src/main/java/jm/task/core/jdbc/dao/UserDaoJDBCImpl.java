@@ -48,7 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.setString(2, lastName);
             statement.setByte(3, age);
 
-            statement.execute();
+            statement.executeUpdate();
             System.out.println("User с именем "+name+" успешно добавлен.");
         }
         catch (SQLException e) {
@@ -63,7 +63,7 @@ public class UserDaoJDBCImpl implements UserDao {
         ) {
             statement.setLong(1, id);
 
-            statement.execute();
+            statement.executeUpdate();
             System.out.println("Пользователь удален.");
         }
         catch (SQLException e) {

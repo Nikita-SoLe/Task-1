@@ -29,6 +29,7 @@ public class Main {
         service.dropUsersTable();
 
         try {
+            Util.getConnection().close();
             Util.getFactory().close();
         } catch (Exception e) {
             System.out.println("Произошла ошибка закрытия соединения с БД.");
